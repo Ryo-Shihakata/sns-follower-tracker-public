@@ -1,0 +1,27 @@
+# /etc/systemd/system/collector.service
+#
+# collector.timer から起動されるワンショットサービス。単体で `systemctl start collector.service`
+# しても1回分の収集が走る。実体は docker compose run --rm collector。
+#
+# 配置手順は collector/README.md 参照。WorkingDirectory はリポジトリの collector/ を
+# 実際に配置したパスに合わせて書き換えること。
+#
+# Restart=on-failure: 停電復帰直後などネットワーク未復旧のまま timer が発火して
+# 失敗した場合に5分間隔で自動再試行する (1時間に最大3回)。
+
+[Unit]
+Description=SNS follower tracker collector (one-shot)
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+StartLimitIntervalSec=3600
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+User=collector-host
+WorkingDirectory=/home/collector-host/apps/sns-follower-tracker/collector
+ExecStart=/usr/bin/docker compose run --rm collector
+TimeoutStartSec=1800
+Restart=on-failure
+RestartSec=300

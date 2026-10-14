@@ -1,0 +1,39 @@
+[project]
+name = "collector"
+version = "0.1.0"
+description = "SNS follower tracker - home-server collector (Instagram/YouTube -> Cloudflare Workers /ingest)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "curl-cffi>=0.15.0",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+# ステルスブラウザによる手段3 (docs/implementation-plan.md §5.2)。
+# playwright/patchright はサイズが大きく、ブラウザバイナリの別途インストールも
+# 必要になるため、ローカルで直接 uv を使うだけの用途では既定で入れない。
+# 有効化したい場合は `uv sync --extra stealth` してから StealthyFetcher 経路を使う。
+# 本番 Docker イメージ (collector/Dockerfile) には常時同梱している (実行するかどうかは
+# IG_ENABLE_STEALTH でランタイム側から切り替える)。
+stealth = [
+    "scrapling[fetchers]>=0.4.10",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=0.24",
+    "respx>=0.21",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/collector"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

@@ -1,0 +1,46 @@
+name: Deploy Worker
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "worker/**"
+      - ".github/workflows/deploy-worker.yml"
+  workflow_dispatch: {}
+
+# 同時デプロイの競合を避ける(D1 migrations適用中の多重実行防止)
+concurrency:
+  group: deploy-worker
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: worker/package-lock.json
+
+      - name: Install dependencies
+        working-directory: worker
+        run: npm ci
+
+      # wrangler-action@v3 は同梱の wrangler 3.x を使うため wrangler.jsonc を読めない。
+      # npm ci 済みのプロジェクト同梱 wrangler (^4) を直接使う。
+      - name: Apply D1 migrations and deploy
+        working-directory: worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        # 本番D1へマイグレーション適用 → デプロイ、の順で実行
+        run: |
+          npx wrangler d1 migrations apply sns-follower-tracker --remote
+          npx wrangler deploy

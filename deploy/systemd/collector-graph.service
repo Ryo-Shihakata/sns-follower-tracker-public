@@ -1,0 +1,23 @@
+# /etc/systemd/system/collector-graph.service
+#
+# collector-graph.timer (毎時) から起動されるワンショットサービス。
+# managed の Graph API アカウントだけを `--graph-only` で収集する
+# (docs/insights-reports-plan.md §2.2: 投稿後の初速カーブ用)。
+# 公式APIのみを叩くため scraping 系アカウントには一切触れない。
+
+[Unit]
+Description=SNS follower tracker collector (graph-only hourly)
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+StartLimitIntervalSec=3600
+StartLimitBurst=2
+
+[Service]
+Type=oneshot
+User=collector-host
+WorkingDirectory=/home/collector-host/apps/sns-follower-tracker/collector
+ExecStart=/usr/bin/docker compose run --rm collector --graph-only
+TimeoutStartSec=900
+Restart=on-failure
+RestartSec=300

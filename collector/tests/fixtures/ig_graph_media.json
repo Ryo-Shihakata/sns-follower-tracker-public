@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "id": "18000000000000001",
+      "permalink": "https://www.instagram.com/p/GRAPHIMAGE1/",
+      "timestamp": "2026-07-01T09:00:00+0000",
+      "media_type": "IMAGE",
+      "caption": "体育祭の様子をお届けします。今年は天候にも恵まれて盛り上がりました。",
+      "like_count": 321,
+      "comments_count": 12,
+      "media_url": "https://scontent.cdninstagram.com/graph/image1.jpg"
+    },
+    {
+      "id": "18000000000000002",
+      "permalink": "https://www.instagram.com/reel/GRAPHVIDEO2/",
+      "timestamp": "2026-06-28T09:00:00+0000",
+      "media_type": "VIDEO",
+      "caption": "文化祭ダイジェスト動画",
+      "like_count": 210,
+      "comments_count": 8,
+      "media_url": "https://scontent.cdninstagram.com/graph/video2.mp4",
+      "thumbnail_url": "https://scontent.cdninstagram.com/graph/video2_thumb.jpg"
+    },
+    {
+      "id": "18000000000000003",
+      "permalink": "https://www.instagram.com/p/GRAPHCAROUSEL3/",
+      "timestamp": "2026-06-25T09:00:00+0000",
+      "media_type": "CAROUSEL_ALBUM",
+      "caption": null,
+      "like_count": 150,
+      "comments_count": 3
+    },
+    {
+      "id": "18000000000000004",
+      "timestamp": "2026-06-20T09:00:00+0000",
+      "media_type": "IMAGE",
+      "caption": "permalink が欠損しているケース",
+      "like_count": 42,
+      "comments_count": 1,
+      "media_url": "https://scontent.cdninstagram.com/graph/image4.jpg"
+    }
+  ],
+  "paging": {
+    "cursors": { "before": "before_cursor", "after": "after_cursor" }
+  }
+}

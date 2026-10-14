@@ -1,0 +1,17 @@
+# /etc/systemd/system/collector-graph.timer
+#
+# 毎時45分に collector-graph.service (managed の Graph API アカウントのみ) を起動する。
+# 既存 collector.timer (02:15/10:15/18:15 + RandomizedDelay 最大10分) と時間帯が
+# 重ならない分を選んである。公式APIのみなので RandomizedDelay は付けず、
+# 初速カーブの等間隔性を優先する (docs/insights-reports-plan.md §8)。
+
+[Unit]
+Description=Run SNS follower tracker graph-only collector hourly
+
+[Timer]
+OnCalendar=*-*-* *:45:00
+OnBootSec=10min
+Persistent=false
+
+[Install]
+WantedBy=timers.target

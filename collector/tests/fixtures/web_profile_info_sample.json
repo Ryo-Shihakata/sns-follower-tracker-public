@@ -1,0 +1,66 @@
+{
+  "data": {
+    "user": {
+      "id": "1234567890",
+      "username": "example_account",
+      "full_name": "福岡実業高校 生徒会",
+      "biography": "福岡実業高校 生徒会公式アカウントです。",
+      "edge_followed_by": { "count": 1234 },
+      "edge_follow": { "count": 10 },
+      "edge_owner_to_timeline_media": {
+        "count": 88,
+        "edges": [
+          {
+            "node": {
+              "__typename": "GraphImage",
+              "shortcode": "C8abcDEfgh1",
+              "taken_at_timestamp": 1719817200,
+              "is_video": false,
+              "display_url": "https://scontent.cdninstagram.com/v/full1.jpg",
+              "thumbnail_src": "https://scontent.cdninstagram.com/v/thumb1.jpg",
+              "edge_liked_by": { "count": 321 },
+              "edge_media_to_comment": { "count": 12 },
+              "edge_media_to_caption": {
+                "edges": [
+                  {
+                    "node": {
+                      "text": "体育祭が無事終わりました！応援ありがとうございました。来年もよろしくお願いします。写真は後日追加投稿します。たくさんのコメントとメッセージもありがとうございました。生徒会一同、心より感謝申し上げます。"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "node": {
+              "__typename": "GraphVideo",
+              "shortcode": "C8videoXyz2",
+              "taken_at_timestamp": 1719644400,
+              "is_video": true,
+              "video_view_count": 5400,
+              "edge_media_preview_like": { "count": 210 },
+              "edge_media_to_comment": { "count": 8 },
+              "edge_media_to_caption": {
+                "edges": [
+                  { "node": { "text": "文化祭の準備動画です！" } }
+                ]
+              }
+            }
+          },
+          {
+            "node": {
+              "__typename": "GraphSidecar",
+              "shortcode": "C8sidecar003",
+              "taken_at_timestamp": 1719471600,
+              "is_video": false,
+              "edge_liked_by": { "count": -1 },
+              "edge_media_to_comment": { "count": 3 },
+              "edge_media_to_caption": { "edges": [] }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "status": "ok"
+}

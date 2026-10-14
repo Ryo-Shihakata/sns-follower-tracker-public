@@ -1,0 +1,38 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sns-follower-tracker",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-12-05",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  // PWA の静的アセット(アイコン/manifest/sw.js)。リクエストがファイルに一致すれば
+  // 配信、なければ Worker(main)が処理する(/ /monitor /api/* /ui/* 等)。
+  "assets": {
+    "directory": "./public"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sns-follower-tracker",
+      "database_id": "<your-d1-database-id>",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // Workers AI (レポート講評。docs/insights-reports-plan.md §4)
+  "ai": {
+    "binding": "AI",
+    // ローカル dev でも実 Workers AI にプロキシする(dev 専用フラグ。本番動作に影響なし)
+    "remote": true
+  },
+  "vars": {
+    // v10: Teams 通知のレポートリンク生成用(公開URLなので vars でよい)
+    "REPORT_BASE_URL": "https://sns-follower-tracker.<your-subdomain>.workers.dev"
+  },
+  "triggers": {
+    // 鮮度点検 cron (計画書 §5.7): 1日1回 /
+    // レポート生成 cron (docs/insights-reports-plan.md §4): 22:00 UTC = JST 7:00
+    "crons": ["15 3 * * *", "0 22 * * *"]
+  }
+}

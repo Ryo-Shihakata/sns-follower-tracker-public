@@ -1,0 +1,24 @@
+# secrets
+.env
+.dev.vars
+*.sqlite
+*.sqlite3
+
+# node
+node_modules/
+dist/
+.wrangler/
+
+# python
+__pycache__/
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+uv.lock.tmp
+
+# claude code worktrees / local agent state
+.claude/
+
+# misc
+.DS_Store

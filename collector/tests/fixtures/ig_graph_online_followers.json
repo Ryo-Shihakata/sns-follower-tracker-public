@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "name": "online_followers",
+      "period": "lifetime",
+      "title": "Online followers",
+      "description": "The time when your followers are most active on Instagram, presented by hours and time zone (UTC).",
+      "values": [
+        {
+          "value": {
+            "0": 12,
+            "1": 8,
+            "21": 340,
+            "22": 210
+          },
+          "end_time": "2026-07-11T07:00:00+0000"
+        }
+      ],
+      "id": "17841400000000000/insights/online_followers/lifetime"
+    }
+  ]
+}

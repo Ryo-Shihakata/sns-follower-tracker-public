@@ -1,0 +1,14 @@
+{
+  "data": {
+    "user": {
+      "id": "999",
+      "username": "empty_account",
+      "edge_followed_by": { "count": 42 },
+      "edge_owner_to_timeline_media": {
+        "count": 0,
+        "edges": []
+      }
+    }
+  },
+  "status": "ok"
+}

@@ -1,0 +1,26 @@
+{
+  "data": {
+    "user": {
+      "pk": "1234567890",
+      "username": "example_account",
+      "full_name": "福岡実業高校 生徒会",
+      "biography": "福岡実業高校 生徒会公式アカウントです。",
+      "is_private": false,
+      "follower_count": 1234,
+      "following_count": 10,
+      "media_count": 88,
+      "friendship_status": {
+        "following": false,
+        "followed_by": false
+      }
+    },
+    "viewer": {
+      "user": {
+        "pk": "9999999999"
+      }
+    }
+  },
+  "extensions": {
+    "is_final": true
+  }
+}

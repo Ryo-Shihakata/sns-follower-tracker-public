@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "name": "reach",
+      "period": "day",
+      "title": "Reach",
+      "total_value": { "value": 3200 },
+      "id": "17841400000000000/insights/reach/day"
+    },
+    {
+      "name": "views",
+      "period": "day",
+      "title": "Views",
+      "total_value": { "value": 9100 },
+      "id": "17841400000000000/insights/views/day"
+    }
+  ]
+}

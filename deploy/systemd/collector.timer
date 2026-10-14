@@ -1,0 +1,20 @@
+# /etc/systemd/system/collector.timer
+#
+# 1日3回 (02:15 / 10:15 / 18:15、いずれもマシンのローカルタイムゾーン) collector.service を起動する。
+# RandomizedDelaySec で全アカウント横並びの機械的なアクセスパターンを避ける
+# (docs/implementation-plan.md §5.2 の礼儀ルールの一環)。
+# OnBootSec: 停電復帰後、次の定刻を待たず起動5分後に1回収集する。
+
+[Unit]
+Description=Run SNS follower tracker collector 3x daily
+
+[Timer]
+OnCalendar=*-*-* 02:15:00
+OnCalendar=*-*-* 10:15:00
+OnCalendar=*-*-* 18:15:00
+OnBootSec=5min
+RandomizedDelaySec=600
+Persistent=true
+
+[Install]
+WantedBy=timers.target

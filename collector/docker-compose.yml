@@ -1,0 +1,11 @@
+# 1回走って終了するワンショットコンテナ。常駐させない。
+# 起動は systemd timer (deploy/systemd/collector.service) から
+# `docker compose run --rm collector` を叩く想定。
+services:
+  collector:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data
+    # ワンショット実行なので restart は付けない。

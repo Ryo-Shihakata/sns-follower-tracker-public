@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "name": "follower_demographics",
+      "period": "lifetime",
+      "title": "Follower demographics",
+      "description": "The number of unique accounts that follow this profile aggregated by age.",
+      "total_value": {
+        "breakdowns": [
+          {
+            "dimension_keys": ["age"],
+            "results": [
+              { "dimension_values": ["13-17"], "value": 12 },
+              { "dimension_values": ["18-24"], "value": 145 },
+              { "dimension_values": ["25-34"], "value": 33 }
+            ]
+          }
+        ]
+      },
+      "id": "17841400000000000/insights/follower_demographics/lifetime"
+    }
+  ]
+}

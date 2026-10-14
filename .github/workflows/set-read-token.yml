@@ -1,0 +1,30 @@
+name: Set READ_API_TOKEN
+
+# 読み取り用トークン（READ_API_TOKEN）を入れ替える。値は GitHub の secret READ_API_TOKEN_NEW に入れてから手動で実行する。
+# Cloudflare の secret は後から読み出せないため、作り直すときはこの流れで入れる（Telos 側は TRACKER_TOKEN に同じ値）
+on:
+  workflow_dispatch: {}
+
+jobs:
+  set:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: worker/package-lock.json
+      - working-directory: worker
+        run: npm ci
+      - name: Put secret
+        working-directory: worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          NEW_TOKEN: ${{ secrets.READ_API_TOKEN_NEW }}
+        run: |
+          test -n "$NEW_TOKEN"
+          printf '%s' "$NEW_TOKEN" | npx wrangler secret put READ_API_TOKEN
